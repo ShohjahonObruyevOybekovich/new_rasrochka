@@ -1,0 +1,34 @@
+version: '3.11'
+
+
+services:
+  bot:
+    build: .
+    #image shokhmee/exam_p18_shohjahon
+    restart: always
+    container_name: tdiu
+    environment:
+      BOT_TOKEN: 7653403894:AAGonfagOWxYGrs5cLqOYbwvE0TUAoeAS0U
+      DB_NAME: postgres
+      DB_PASSWORD: 1
+      DB_HOST: pg
+      DB_USER: postgres
+      DB_PORT: 5432
+    depends_on:
+      - pg
+    command: python3 main.py
+
+
+  pg:
+    image: postgres:alpine
+    restart: always
+    container_name: contine_tdiu
+    environment:
+      POSTGRES_PASSWORD: 1
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data/
+
+volumes:
+  pg_data:
